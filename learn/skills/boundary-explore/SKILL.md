@@ -1,0 +1,68 @@
+---
+name: boundary-explore
+description: 边界探索技能——学生写 SQL/改 SQL 验证对 AST 的猜测，老师在黑板标注解释差异。触发词：边界探索、验证一下、试试、试一下、如果改成、猜测的树图、会不会不一样。
+triggers: ["边界探索", "验证一下", "试试", "试一下", "如果改成", "猜测的树图", "会不会不一样"]
+---
+
+## 模式切换
+
+> 🎓 学习模式 — 使用此技能前自动切换到学习场景
+
+```bash
+python "C:/Users/zlx_1/.claude/plugins/cache/zlx/common/toggle-mode.py" learn
+```
+
+继续前先运行以上命令切换为学习模式（关闭 tdd 门禁等开发钩子）。
+
+# Boundary Explore — 边界探索技能
+
+> 学生理解了一个概念后，主动写各种 SQL 试边界，验证对 AST 的理解。老师在黑板标注差异。
+
+## 触发时机
+
+- 学生说"如果改成 xxx 会怎样？"
+- "这个 SQL 的树图会是什么样？"
+- "xx 和 xx 有什么区别？"
+- 学生学完一个概念，但不确认自己理解对了
+
+## 流程
+
+```
+学生写/改 SQL
+    ↓
+学生：在自己的 blackboard_student_run.py 里加 show(sql_text="...")
+    ↓ 右键 Run，看 AST 树图
+学生：对比预期树图和实际树图的差异
+    ↓
+老师：在黑板上标注为什么有差异
+    ↓ 写入 00notes/ 作为边界记录
+```
+
+## 工具
+
+| 工具 | 用途 |
+|------|------|
+| `blackboard_student_run.py` | 学生跑 SQL 看树图，`show(sql_text="...")` |
+| `pglast_debug.py -m 5` | AST 树图生成（学生工具内部调用） |
+| `blackboard.md`（我写） | 标注差异分析 |
+| `00notes/` | 记录边界发现 |
+
+## 典型场景
+
+### 等价类验证
+学生学完 ColumnRef 的 5 种 fields 后，自己写各种组合的 SQL 看树图对不对得上。
+
+### 结构对比
+- "普通 SELECT 和带 JOIN 的 SELECT，树图区别在哪？"
+- "如果把 JOIN 改成 WHERE 子查询，树图怎么变？"
+
+### 反直觉测试
+- "`SELECT *` 和 `SELECT col` 的树图差在哪？"
+- "子查询里引用外层列，depth 会变吗？"
+
+## 产出物
+
+每次边界探索完成后，将发现写入 `scripts/tutorial/00notes/` 对应笔记文件：
+- 发现了什么新等价类？
+- 什么猜测被证伪了？
+- 有什么值得记住的边界行为？
