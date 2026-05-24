@@ -1,0 +1,27 @@
+{
+  "name": "zlx",
+  "description": "zlx 个人学习与开发插件市场",
+  "owner": {
+    "name": "zlx"
+  },
+  "plugins": [
+    {
+      "name": "learn",
+      "description": "学习模式技能集：教学、边界探索、应用实践、验证猜测",
+      "version": "1.0.0",
+      "source": "./learn/",
+      "author": {
+        "name": "zlx"
+      }
+    },
+    {
+      "name": "dev",
+      "description": "开发模式技能集：项目开发相关技能（待扩展）",
+      "version": "1.0.0",
+      "source": "./dev/",
+      "author": {
+        "name": "zlx"
+      }
+    }
+  ]
+}
