@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "learn",
+      "name": "zlx-l",
       "description": "学习模式技能集：教学、边界探索、应用实践、验证猜测",
       "version": "1.0.0",
       "source": "./zlx-l/",
