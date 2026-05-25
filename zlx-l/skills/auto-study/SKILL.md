@@ -26,6 +26,7 @@ python "C:/Users/zlx_1/.claude/plugins/cache/zlx/common/toggle-mode.py" learn
 4. **不越界** — 这个 skill 只做**知识管线**（学会→验证→写成笔记）。**经验管线**（如何应用到项目）不做，那是单独的课题。
 5. **断言驱动验证** — cc 能验证 ↔ cc 能写出确定性的 assert。写不出 assert → 进兜底。
 6. **作业契约** — 子 agent 按主 agent 指定的函数签名写作业（homework.py），主 agent 不看代码也能写测试批量批改。
+7. **git 留痕** — 子 agent 提交作业用 git commit，主 agent 审查修改后用 git commit。写笔记、修 bug、改断言——每步留痕。日后对比 git log 就知道哪次验证了什么、哪里理解错了。
 
 ## 跟现有 4 个技能的关系
 
