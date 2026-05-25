@@ -95,6 +95,7 @@ teach-concept 是**总调度者**，不自己做完所有事。以下 3 个 skil
 
 | skill | 触发时机 | 职责 |
 |-------|---------|------|
+| `code-reasoning` | 学生说"这段代码看不懂"/"这写的啥" | 三步拆解源码：输入输出→决策树→自动 trace |
 | `boundary-explore` | 学生说"试试"/"如果改成"/"猜测"时 | 学生自己写 SQL 验证边界，老师标注差异 |
 | `practice-apply` | Step 5 串联完成后 | 写生产级代码，将知识转化为可复用函数 |
 | `verify-hunch` | practice-apply 完成后 | 出题/树图对比，验证理解深度 |
