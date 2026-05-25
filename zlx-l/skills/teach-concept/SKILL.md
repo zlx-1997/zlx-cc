@@ -80,7 +80,29 @@ python "C:/Users/zlx_1/.claude/plugins/cache/zlx/common/toggle-mode.py" learn
          └── 非新知识点 → 直接回答后继续
     ↓ 所有等价类覆盖完
 [Step 5] 串联 — 用组合例子把所有概念串起来
+    ↓
+[Step 6] 自动调度 — 根据教学阶段派发子 skill
+         ├── 教学过程中学生说"试试/如果改成" → boundary-explore（边界探索）
+         ├── Step 5 完成后 → practice-apply（应用实践）
+         ├── practice-apply 完成后 → verify-hunch（验证理解）
+         └── 任何时候发现新知识点 → 自动写笔记到 00notes/
+    ↓ 回到 Step 1，或结束
 ```
+
+## 流程编排角色
+
+teach-concept 是**总调度者**，不自己做完所有事。以下 3 个 skill 由 teach-concept 在适当时机自动触发：
+
+| skill | 触发时机 | 职责 |
+|-------|---------|------|
+| `boundary-explore` | 学生说"试试"/"如果改成"/"猜测"时 | 学生自己写 SQL 验证边界，老师标注差异 |
+| `practice-apply` | Step 5 串联完成后 | 写生产级代码，将知识转化为可复用函数 |
+| `verify-hunch` | practice-apply 完成后 | 出题/树图对比，验证理解深度 |
+
+**调度规则**：
+- 不需要等学生或老师手动调用——teach-concept 在每次问答后判断是否满足触发条件
+- 子 skill 完成后自动回到 teach-concept 继续
+- 教学过程中产生的疑问 → 写笔记到 `scripts/tutorial/00notes/`（不等提醒）
 
 ## 教学辅助工具
 
