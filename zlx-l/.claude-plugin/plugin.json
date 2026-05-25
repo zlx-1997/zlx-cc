@@ -1,7 +1,7 @@
 {
   "name": "zlx-l",
-  "version": "1.0.0",
-  "description": "学习模式技能集：教学、边界探索、应用实践、验证猜测",
+  "version": "1.1.0",
+  "description": "学习模式技能集：教学、边界探索、应用实践、验证猜测、自学管线、代码推理",
   "author": {
     "name": "zlx"
   },
@@ -9,6 +9,8 @@
     "./skills/teach-concept/",
     "./skills/boundary-explore/",
     "./skills/practice-apply/",
-    "./skills/verify-hunch/"
+    "./skills/verify-hunch/",
+    "./skills/auto-study/",
+    "./skills/code-reasoning/"
   ]
 }
