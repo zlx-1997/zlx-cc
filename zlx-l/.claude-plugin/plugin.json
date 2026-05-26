@@ -11,6 +11,7 @@
     "./skills/practice-apply/",
     "./skills/verify-hunch/",
     "./skills/auto-study/",
-    "./skills/code-reasoning/"
+    "./skills/code-reasoning/",
+    "./skills/homework-review/"
   ]
 }
