@@ -110,7 +110,7 @@ teach-concept 是**总调度者**，不自己做完所有事。以下 3 个 skil
 讲解时必须使用以下工具辅助可视化，不靠纯文本：
 
 1. **黑板书 `scripts/blackboard_system/blackboard.md`** — 我写 SQL + 标注，学生打开看
-2. **AST 树图 `scripts/pglast_debug.py -m 5`** — 解释 SQL 语法结构
+2. **AST 树图 `scripts/pglast_tool.py tree`** — 解释 SQL 语法结构
 3. **学生工具 `scripts/blackboard_system/blackboard_student_run.py`** — 学生自己跑 SQL 看树图
 
 这三种工具贯穿整个教学流程：我讲时用黑板写 SQL→跑树图→标注，学生不懂时自己在学生工具里试。
@@ -131,10 +131,11 @@ teach-concept 是**总调度者**，不自己做完所有事。以下 3 个 skil
 
 优先级从高到低：
 
+0. **查 UA 知识图谱** — 如果话题涉及已知代码库，先检查 `.understand-anything/knowledge-graph.json` 是否存在（路径查 memory 中 `*-knowledge-graph` 记录）。图谱提供文件级结构索引和教学导览（tour），帮助确定依赖顺序和等价类范围。图谱不替代 wiki/rules 的语义文档，两者互补。
 1. **`inspect.getsource(X)`** — 读类的源码定义，第一时间看到字段和文档注释
 2. **查 wiki `.omc/wiki/`** — 项目内部已有记录，避免重复
 3. **查 rules `.claude/rules/api/`** — 接口文档和常见操作模式
-4. **`scripts/pglast_debug.py`** — 当黑盒子是 SQL AST 结构时使用
+4. **`scripts/pglast_tool.py`** — 当黑盒子是 SQL AST 结构时使用
 5. **`type()` + `dir()` + 遍历实例属性** — 动态看一个对象有什么，最后手段
 
 **只 dump 与当前用户疑问直接相关的属性。** 如果属性太多，先判断用户最可能卡在哪几个，聚焦在这些上。一次性全抛出去等于信息淹没，和不讲差不多。

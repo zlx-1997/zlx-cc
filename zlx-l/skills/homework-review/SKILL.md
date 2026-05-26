@@ -22,20 +22,19 @@ triggers: ["审查作业", "批改", "review homework", "check homework"]
 
 ### Step 1：路径与全局状态
 
+项目已 `pip install -e .`，`src.xxx` 全局可 import。
+
 ```python
-# ❌ 禁止——硬编码层级
+# ❌ 禁止——不需要任何 sys.path.insert
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 # ❌ 禁止——改工作目录
 os.chdir("../../..")
-
-# ✅ 正确——用项目标准方法
-from src.common.find_anchor import find_anchor
-PROJECT_ROOT = find_anchor(__file__, "CLAUDE.md")
 ```
 
-- `sys.path.insert(0, ...)` → 用完 pop 了吗？没有就是污染全局 path
+- `sys.path.insert(0, ...)` → 在 editable install 下是多余的，删掉
 - 有 `os.chdir` 或 `Path.cwd` 依赖？→ 重构掉
+- 如果确实需要 project root 路径（如读配置文件），用 `from src.common.config import PROJECT_ROOT`
 
 ### Step 2：AST 遍历方式
 
@@ -120,7 +119,7 @@ assert result is not None  # 外部可观察，不管内部结构
 ### Step 5：审查清单（逐项打勾）
 
 ```
-□ 路径：用了 find_anchor 还是手写？            ✅/❌
+□ 路径：有 sys.path.insert 吗？（editable install 后不需要）✅/❌
 □ AST 遍历：用了 Visitor 还是手动？             ✅/❌
   若手动 → reasoning.md 解释了为什么吗？          ✅/❌
 □ except Exception：有裸捕获吗？               ✅/❌
@@ -128,6 +127,10 @@ assert result is not None  # 外部可观察，不管内部结构
   有 → 子 agent 标注了"不确定"吗？               ✅/❌
 □ verifier 测行为还是测实现？                    ✅/❌
 □ reasoning.md 卡点 → 主 agent 逐条回答了？     ✅/❌
+□ lessons-learned 规则逐条遵守了？              ✅/❌
 ```
 
 **任意 ❌ 必须修正后才能写 verifier.py。**
+```
+事后：主 agent 将本次审查发现的新错误模式 → 追加到 lessons-learned.md
+```

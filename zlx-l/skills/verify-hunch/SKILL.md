@@ -45,7 +45,7 @@ SELECT cty_cd, MIN(...) FROM ref_city WHERE ... <> 'CN'
 
 ### ② 预测树图
 
-我给 SQL，学生预测树图结构，然后跑 `pglast_debug.py -m 5` 验证。
+我给 SQL，学生预测树图结构，然后跑 `pglast_tool.py tree` 验证。
 
 ```
 输入（SQL）:
@@ -58,7 +58,7 @@ SelectStmt
   └── whereClause: ...
 
 验证:
-python scripts/pglast_debug.py -m 5 "SELECT d.name FROM departments d WHERE d.id > 1"
+python scripts/pglast_tool.py tree "SELECT d.name FROM departments d WHERE d.id > 1"
 ```
 
 ### ③ 等价类抽查
@@ -79,7 +79,7 @@ python scripts/pglast_debug.py -m 5 "SELECT d.name FROM departments d WHERE d.id
 | 工具 | 用途 |
 |------|------|
 | `blackboard_student_run.py` | 学生验证 SQL 树图（三种考试都能用） |
-| `pglast_debug.py -m 5` | 出题时生成树图 / 验证预测 |
+| `pglast_tool.py tree` | 出题时生成树图 / 验证预测 |
 | `00notes/` | 记录考题和常见错误 |
 
 ## 评分标准

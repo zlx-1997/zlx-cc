@@ -49,7 +49,7 @@ python "C:/Users/zlx_1/.claude/plugins/cache/zlx/common/toggle-mode.py" learn
 | 工具 | 用途 |
 |------|------|
 | `blackboard_student_run.py` | 学生跑 SQL 看树图，`show(sql_text="...")` |
-| `pglast_debug.py -m 5` | AST 树图生成（学生工具内部调用） |
+| `pglast_tool.py tree` | AST 树图生成（学生工具内部调用） |
 | `blackboard.md`（我写） | 标注差异分析 |
 | `00notes/` | 记录边界发现 |
 
